@@ -335,6 +335,17 @@
         .image-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.9); z-index: 1000; justify-content: center; overflow-y: auto; padding: 20px; }
         .image-modal-content { background-color: var(--card-color); border-radius: var(--border-radius); padding: 20px; display: flex; flex-direction: column; align-items: center; width: 90%; max-width: 500px; gap: 20px; max-height: 90vh; overflow-y: auto; position: relative; }
         .image-modal img { max-width: 100%; height: auto; border-radius: var(--border-radius); object-fit: contain; }
+        /* Centraliza o título do modal */
+        #modal-title {
+            text-align: center;
+            color: var(--primary-color); /* Mantém a cor original */
+            font-size: 1.5rem; /* Ajuste o tamanho da fonte se necessário */
+            margin-top: 10px; /* Espaçamento entre a imagem e o título */
+            margin-bottom: 20px; /* Espaçamento entre o título e a descrição */
+            border-bottom: none; /* Remove a linha de baixo se não quiser no título */
+            padding-bottom: 0;
+            width: 100%; /* Ocupa a largura total para centralizar */
+        }
         .modal-text-content { width: 100%; text-align: left; }
         .modal-text-content h3 { margin: 0; color: var(--primary-color); font-size: 1.1rem; border-bottom: 1px solid var(--input-bg-color); padding-bottom: 5px; margin-bottom: 10px; }
         .modal-text-content p { margin: 0 0 10px; color: var(--text-color); font-size: 0.9rem; }
@@ -372,7 +383,9 @@
         <a href="personal.html">Personal Trainer</a>
         <a href="sobre.html">Sobre</a>
         <div class="sponsorship-box">
-            <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/anuncie_aqui.gif" alt="Anuncie Aqui">
+            <a href="https://wa.me/+5511911111111?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20como%20anunciar%20meu%20perfil%20no%20app%20Meu%20Treino." target="_blank">
+                <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/anuncie_aqui.gif" alt="Anuncie Aqui">
+            </a>
         </div>
     </div>
     <div id="page-overlay" onclick="closeNav()"></div>
@@ -723,7 +736,7 @@
                 if (isEditingMode) { card.classList.add('editing'); }
                 let nameElement;
                 if (isEditingMode) { nameElement = `<div class="name-container"><textarea data-type="name" class="editable-name" onblur="updateWorkout(this)" onkeydown="if(event.key === 'Enter') this.blur();">${workout.name}</textarea></div>`; } else { nameElement = `<div class="name-container"><h3>${workout.name}</h3></div>`; }
-                card.innerHTML = `${isEditingMode ? `<div class="remove-btn" onclick="removeExercise(this)"><i class="fas fa-minus"></i></div>` : ''}<div class="switch-container"><label class="switch"><input type="checkbox" ${workout.completed ? 'checked' : ''} onchange="toggleCompleted(this)" ${isEditingMode ? 'disabled' : ''}><span class="slider"></span></label></div><div class="video-placeholder" onclick="handleImageClick(this, '${workout.image || defaultImage}', '${workout.name}')"><img class="exercise-image" src="${workout.image || defaultImage}" alt="${workout.name}" onerror="this.src='${defaultImage}'; this.style.display='block'; this.nextElementSibling.style.display='none';"><div class="error-message">No image</div></div><div class="content">${nameElement}<div class="details"><div class="input-group"><label>Séries</label><div class="input-field"><input type="number" value="${workout.series}" min="1" onchange="updateWorkout(this)" ${isEditingMode ? '' : 'disabled'}><i class="fas fa-list-ul"></i></div></div><div class="input-group"><label>Repetições</label><div class="input-field"><input type="number" value="${workout.reps}" min="1" onchange="updateWorkout(this)" ${isEditingMode ? '' : 'disabled'}><i class="fas fa-sync-alt"></i></div></div><div class="input-group"><label>Peso</label><div class="input-field"><input type="number" value="${workout.weight || "0"}" min="0" onchange="updateWorkout(this)" ${isEditingMode ? '' : 'disabled'}><span>Kg</span></div></div></div></div>`;
+                card.innerHTML = `${isEditingMode ? `<div class="remove-btn" onclick="removeExercise(this)"><i class="fas fa-minus"></i></div>` : ''}<div class="switch-container"><label class="switch"><input type="checkbox" ${workout.completed ? 'checked' : ''} onchange="toggleCompleted(this)" ${isEditingMode ? '' : 'disabled'}><span class="slider"></span></label></div><div class="video-placeholder" onclick="handleImageClick(this, '${workout.image || defaultImage}', '${workout.name}')"><img class="exercise-image" src="${workout.image || defaultImage}" alt="${workout.name}" onerror="this.src='${defaultImage}'; this.style.display='block'; this.nextElementSibling.style.display='none';"><div class="error-message">No image</div></div><div class="content">${nameElement}<div class="details"><div class="input-group"><label>Séries</label><div class="input-field"><input type="number" value="${workout.series}" min="1" onchange="updateWorkout(this)" ${isEditingMode ? '' : 'disabled'}><i class="fas fa-list-ul"></i></div></div><div class="input-group"><label>Repetições</label><div class="input-field"><input type="number" value="${workout.reps}" min="1" onchange="updateWorkout(this)" ${isEditingMode ? '' : 'disabled'}><i class="fas fa-sync-alt"></i></div></div><div class="input-group"><label>Peso</label><div class="input-field"><input type="number" value="${workout.weight || "0"}" min="0" onchange="updateWorkout(this)" ${isEditingMode ? '' : 'disabled'}><span>Kg</span></div></div></div></div>`;
                 container.appendChild(card);
             });
             if (isEditingMode) { setupAutocomplete(); }
