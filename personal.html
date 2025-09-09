@@ -24,11 +24,11 @@
         .header .header-link { text-decoration: none; color: inherit; position: absolute; left: 50%; transform: translateX(-50%); }
         .header .title { font-size: 1.25rem; font-weight: bold; display: flex; align-items: center; }
         .header .placeholder { width: 40px; }
-        .side-menu { height: 100%; width: 0; position: fixed; z-index: 1001; top: 0; left: 0; background-color: var(--card-color); overflow-x: hidden; transition: 0.3s; padding-top: 60px; box-shadow: 2px 0 5px rgba(0,0,0,0.5); display: flex; flex-direction: column; }
+        .side-menu { height: 100%; width: 0; position: fixed; z-index: 1001; top: 0; left: 0; background-color: var(--card-color); overflow-x: hidden; transition: 0.3s; padding-top: 60px; box-shadow: 3px 0 10px rgba(0,0,0,0.3); display: flex; flex-direction: column; }
         .side-menu.open { width: var(--menu-width); }
-        .side-menu .close-btn { position: absolute; top: 15px; right: 25px; font-size: 2rem; color: var(--text-color); cursor: pointer; }
-        .side-menu a { padding: 15px 20px; text-decoration: none; font-size: 1.1rem; color: var(--text-color); display: block; transition: 0.3s; border-bottom: 1px solid var(--input-bg-color); }
-        .side-menu a:hover { background-color: #575757; color: var(--primary-color); }
+        .side-menu .close-btn { position: absolute; top: 15px; right: 25px; font-size: 2rem; color: var(--text-color); cursor: pointer; text-decoration: none; }
+        .side-menu .nav-link { padding: 15px 20px; text-decoration: none; font-size: 1.1rem; color: var(--text-color); display: block; transition: 0.3s; border-bottom: 1px solid var(--input-bg-color); }
+        .side-menu .nav-link:hover { background-color: #575757; color: var(--primary-color); }
         .side-menu .sponsorship-box { margin-top: auto; padding: 20px; text-align: center; }
         .side-menu .sponsorship-box img { max-width: 100%; border-radius: var(--border-radius); }
         #page-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 1000; display: none; transition: opacity 0.3s; }
@@ -42,6 +42,21 @@
         .personal-card p { color: var(--secondary-text-color); margin: 0 0 10px; line-height: 1.5; }
         .contact-links a { color: var(--primary-color); text-decoration: none; margin: 0 10px; font-size: 1.2rem; transition: color 0.3s; }
         .contact-links a:hover { color: #ffd54f; }
+
+        /* Estilo para o card de anúncio */
+        .ad-card {
+            background: none;
+            border: 2px dashed var(--primary-color);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .ad-card:hover {
+            background-color: #383838;
+        }
+        .ad-card h2 {
+            color: var(--primary-color);
+        }
+
         .footer { text-align: center; padding: 8px 16px; color: var(--secondary-text-color); font-size: 0.875rem; background-color: #282828; margin-top: auto; width: 100%; }
         @media (max-width: 600px) { .side-menu.open { width: min(var(--menu-width), 80vw); } }
     </style>
@@ -50,10 +65,10 @@
 
     <div id="side-menu" class="side-menu">
         <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
-        <a href="index.html">Meu Treino</a>
-        <a href="todos_exercicios.html">Todos Exercícios</a>
-        <a href="personal.html">Personal Trainer</a>
-        <a href="sobre.html">Sobre</a>
+        <a href="index.html" class="nav-link">Meu Treino</a>
+        <a href="todos_exercicios.html" class="nav-link">Todos Exercícios</a>
+        <a href="personal.html" class="nav-link">Personal Trainer</a>
+        <a href="sobre.html" class="nav-link">Sobre</a>
         <div class="sponsorship-box">
             <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/anuncie_aqui.gif" alt="Anuncie Aqui">
         </div>
@@ -70,14 +85,14 @@
         </div>
 
         <div class="container">
-            <h1>Conheça Nossos Personal Trainers</h1>
-            <p>Nossos profissionais estão prontos para te ajudar a alcançar seus objetivos fitness com planos personalizados e acompanhamento dedicado.</p>
+            <h1>Escolha um Personal Trainer</h1>
+            <p>Os profissionais estão prontos para te ajudar a alcançar seus objetivos fitness com planos personalizados e acompanhamento dedicado.</p>
 
             <div class="personal-card">
-                <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/personal1.gif" alt="Foto do Personal Trainer">
-                <h2>[Nome do Personal]</h2>
-                <p>Especialista em [Ex: ganho de massa muscular e treinamento de força].</p>
-                <p><b>Experiência:</b> [X] anos</p>
+                <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/personal1.gif" alt="Foto do Personal Trainer João Silva">
+                <h2>João Silva</h2>
+                <p>Especialista em ganho de massa muscular e treinamento de força.</p>
+                <p><b>Experiência:</b> 10 anos</p>
                 <div class="contact-links">
                     <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
                     <a href="#"><i class="fas fa-envelope"></i></a>
@@ -85,7 +100,25 @@
                 </div>
             </div>
 
-            <p style="margin-top: 30px;">Entre em contato para agendar sua consultoria inicial!</p>
+            <div class="personal-card">
+                <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/personal1.gif" alt="Foto da Personal Trainer Maria Souza">
+                <h2>Maria Souza</h2>
+                <p>Focada em emagrecimento, condicionamento físico e bem-estar.</p>
+                <p><b>Experiência:</b> 8 anos</p>
+                <div class="contact-links">
+                    <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fas fa-envelope"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="personal-card ad-card" onclick="location.href='mailto:contato@meutreino.com'">
+                <h2>Anuncie Seu Perfil Aqui</h2>
+                <p>Quer aparecer para milhares de usuários e conseguir novos alunos? Clique aqui para saber mais.</p>
+                <div class="contact-links">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+            </div>
         </div>
 
         <footer class="footer">
