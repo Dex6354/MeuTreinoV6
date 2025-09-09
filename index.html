@@ -372,9 +372,7 @@
         <a href="personal.html">Personal Trainer</a>
         <a href="sobre.html">Sobre</a>
         <div class="sponsorship-box">
-         <a href="https://wa.me/+5511911111111?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20como%20anunciar%20meu%20perfil%20no%20app%20Meu%20Treino." target="_blank">
-          <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/anuncie_aqui.gif" alt="Anuncie Aqui">
-         </a>
+            <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/anuncie_aqui.gif" alt="Anuncie Aqui">
         </div>
     </div>
     <div id="page-overlay" onclick="closeNav()"></div>
@@ -426,6 +424,7 @@
         <div class="image-modal" id="image-modal" onclick="closeImageModal()">
             <div class="image-modal-content">
                 <img id="expanded-image" src="" alt="Imagem expandida">
+                <h3 id="modal-title"></h3>
                 <div class="modal-text-content">
                     <h3>Descrição</h3><p id="modal-description"></p>
                     <h3>Grupo Muscular</h3><p id="modal-muscle-group"></p>
@@ -737,10 +736,12 @@
         function expandImage(src, exerciseName) {
             const imageModal = document.getElementById('image-modal');
             const expandedImage = document.getElementById('expanded-image');
+            const modalTitle = document.getElementById('modal-title');
             const modalDescription = document.getElementById('modal-description');
             const modalMuscleGroup = document.getElementById('modal-muscle-group');
             const modalInstructions = document.getElementById('modal-instructions');
             expandedImage.src = src;
+            modalTitle.textContent = exerciseName;
             const exerciseData = exerciciosList.find(ex => ex.nome === exerciseName);
             if (exerciseData) {
                 modalDescription.textContent = exerciseData.descricao || 'Descrição não disponível.';
