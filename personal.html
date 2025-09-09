@@ -8,42 +8,193 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --bg-color: #212121;
-            --card-color: #2c2c2c;
-            --text-color: #f0f0f0;
-            --secondary-text-color: #a0a0a0;
+            --bg-color: #121212; /* Fundo mais escuro */
+            --card-color: #1e1e1e; /* Cor do card ligeiramente mais clara */
+            --text-color: #e0e0e0;
+            --secondary-text-color: #b0b0b0;
             --primary-color: #ffc107;
-            --border-radius: 12px;
-            --input-bg-color: #383838;
-            --menu-width: 250px;
+            --border-radius: 16px; /* Borda mais arredondada */
+            --input-bg-color: #2c2c2c;
+            --menu-width: 280px; /* Menu um pouco mais largo */
         }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
-        *, *::before, *::after { box-sizing: border-box; }
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--input-bg-color); position: sticky; top: 0; z-index: 10; background-color: var(--bg-color); }
-        .header .menu-icon { font-size: 1.5rem; cursor: pointer; color: var(--text-color); padding: 5px; }
-        .header .header-link { text-decoration: none; color: inherit; position: absolute; left: 50%; transform: translateX(-50%); }
-        .header .title { font-size: 1.25rem; font-weight: bold; display: flex; align-items: center; }
-        .header .placeholder { width: 40px; }
-        .side-menu { height: 100%; width: 0; position: fixed; z-index: 1001; top: 0; left: 0; background-color: var(--card-color); overflow-x: hidden; transition: 0.3s; padding-top: 60px; box-shadow: 3px 0 10px rgba(0,0,0,0.3); display: flex; flex-direction: column; }
-        .side-menu.open { width: var(--menu-width); }
-        .side-menu .close-btn { position: absolute; top: 15px; right: 25px; font-size: 2rem; color: var(--text-color); cursor: pointer; text-decoration: none; }
-        .side-menu .nav-link { padding: 15px 20px; text-decoration: none; font-size: 1.1rem; color: var(--text-color); display: block; transition: 0.3s; border-bottom: 1px solid var(--input-bg-color); }
-        .side-menu .nav-link:hover { background-color: #575757; color: var(--primary-color); }
-        .side-menu .sponsorship-box { margin-top: auto; padding: 20px; text-align: center; }
-        .side-menu .sponsorship-box img { max-width: 100%; border-radius: var(--border-radius); }
-        #page-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 1000; display: none; transition: opacity 0.3s; }
-        #page-overlay.show { display: block; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--input-bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: var(--bg-color);
+        }
+        .header .menu-icon {
+            font-size: 1.75rem; /* Ícone maior */
+            cursor: pointer;
+            color: var(--primary-color);
+            padding: 5px;
+        }
+        .header .header-link {
+            text-decoration: none;
+            color: inherit;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .header .title {
+            font-size: 1.5rem; /* Título maior */
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .header .title img {
+            width: 28px; /* Ícone do título maior */
+            height: 28px;
+            margin-right: 12px;
+            border-radius: 8px;
+        }
+        .header .placeholder {
+            width: 40px;
+        }
+        .side-menu {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1001;
+            top: 0;
+            left: 0;
+            background-color: var(--card-color);
+            overflow-x: hidden;
+            transition: 0.4s;
+            padding-top: 70px;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+        }
+        .side-menu.open {
+            width: var(--menu-width);
+        }
+        .side-menu .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .side-menu .nav-link {
+            padding: 18px 25px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            display: block;
+            transition: 0.3s;
+            border-bottom: 1px solid #333;
+        }
+        .side-menu .nav-link:hover {
+            background-color: #383838;
+            color: var(--primary-color);
+        }
+        .side-menu .sponsorship-box {
+            margin-top: auto;
+            padding: 25px;
+            text-align: center;
+        }
+        .side-menu .sponsorship-box img {
+            max-width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        #page-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            display: none;
+            transition: opacity 0.4s;
+        }
+        #page-overlay.show {
+            display: block;
+        }
 
-        .container { flex-grow: 1; padding: 20px; max-width: 800px; margin: 20px auto; background-color: var(--card-color); border-radius: var(--border-radius); box-shadow: 0 4px 8px rgba(0,0,0,0.2); text-align: center; }
-        h1 { color: var(--primary-color); margin-bottom: 20px; }
-        .personal-card { display: flex; flex-direction: column; align-items: center; margin-top: 25px; padding: 15px; border-radius: var(--border-radius); background-color: var(--input-bg-color); }
-        .personal-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 3px solid var(--primary-color); }
-        .personal-card h2 { color: var(--text-color); margin: 0 0 5px; }
-        .personal-card p { color: var(--secondary-text-color); margin: 0 0 10px; line-height: 1.5; }
-        .contact-links a { color: var(--primary-color); text-decoration: none; margin: 0 10px; font-size: 1.2rem; transition: color 0.3s; }
-        .contact-links a:hover { color: #ffd54f; }
+        .container {
+            flex-grow: 1;
+            padding: 20px;
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 2rem;
+        }
+        .personal-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            background-color: var(--input-bg-color);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .personal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+        .personal-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--primary-color);
+        }
+        .personal-card h2 {
+            color: var(--text-color);
+            font-size: 1.8rem;
+            margin: 0 0 8px;
+            font-weight: 600;
+        }
+        .personal-card p {
+            color: var(--secondary-text-color);
+            margin: 0 0 15px;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        .contact-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 2rem;
+            transition: color 0.3s;
+        }
+        .contact-links a:hover {
+            color: #ffd766;
+        }
 
-        /* Estilo para o card de anúncio */
         .ad-card {
             background: none;
             border: 2px dashed var(--primary-color);
@@ -56,9 +207,40 @@
         .ad-card h2 {
             color: var(--primary-color);
         }
+        .ad-card .contact-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-        .footer { text-align: center; padding: 8px 16px; color: var(--secondary-text-color); font-size: 0.875rem; background-color: #282828; margin-top: auto; width: 100%; }
-        @media (max-width: 600px) { .side-menu.open { width: min(var(--menu-width), 80vw); } }
+        .footer {
+            text-align: center;
+            padding: 12px 16px;
+            color: var(--secondary-text-color);
+            font-size: 0.9rem;
+            background-color: #1e1e1e;
+            margin-top: auto;
+            width: 100%;
+            border-top: 1px solid #333;
+        }
+        @media (max-width: 600px) {
+            .side-menu.open {
+                width: min(var(--menu-width), 80vw);
+            }
+            .header .title {
+                font-size: 1.25rem;
+            }
+            .personal-card img {
+                width: 120px;
+                height: 120px;
+            }
+            .personal-card h2 {
+                font-size: 1.5rem;
+            }
+            .personal-card p {
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -70,7 +252,7 @@
         <a href="personal.html" class="nav-link">Personal Trainer</a>
         <a href="sobre.html" class="nav-link">Sobre</a>
         <div class="sponsorship-box" onclick="window.open('https://wa.me/+5511911111111?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20como%20anunciar%20meu%20perfil%20no%20app%20Meu%20Treino.', '_blank');" style="cursor: pointer;">
-    <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/anuncie_aqui.gif" alt="Anuncie Aqui">
+            <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/anuncie_aqui.gif" alt="Anuncie Aqui">
         </div>
     </div>
     <div id="page-overlay" onclick="closeNav()"></div>
@@ -79,14 +261,17 @@
         <div class="header">
             <span class="menu-icon" onclick="openNav()">&#9776;</span>
             <a href="index.html" class="header-link">
-                <span class="title">Personal Trainer</span>
+                <span class="title">
+                    <img src="https://raw.githubusercontent.com/Dex6354/MeuTreino/refs/heads/main/IconeTreino.jpg" alt="Ícone de Treino">
+                    Meu Treino
+                </span>
             </a>
             <span class="placeholder"></span>
         </div>
 
         <div class="container">
             <h1>Escolha um Personal Trainer</h1>
-            <p>Os profissionais estão prontos para te ajudar a alcançar seus objetivos fitness com planos personalizados e acompanhamento dedicado.</p>
+            <p style="color: var(--secondary-text-color);">Os profissionais estão prontos para te ajudar a alcançar seus objetivos fitness com planos personalizados e acompanhamento dedicado.</p>
 
             <div class="personal-card">
                 <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/personal1.gif" alt="Foto do Personal Trainer João Silva">
@@ -132,8 +317,7 @@
         function closeNav() {
             document.getElementById("side-menu").classList.remove('open');
             document.getElementById("page-overlay").classList.remove('show');
-       
- }
+        }
         document.addEventListener('keydown', (event) => { if (event.key === "Escape") closeNav(); });
     </script>
 </body>
