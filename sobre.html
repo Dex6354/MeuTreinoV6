@@ -29,17 +29,29 @@
         .side-menu .close-btn { position: absolute; top: 15px; right: 25px; font-size: 2rem; color: var(--text-color); cursor: pointer; }
         .side-menu a { padding: 15px 20px; text-decoration: none; font-size: 1.1rem; color: var(--text-color); display: block; transition: 0.3s; border-bottom: 1px solid var(--input-bg-color); }
         .side-menu a:hover { background-color: #575757; color: var(--primary-color); }
-        .side-menu .sponsorship-box { margin-top: auto; padding: 20px; text-align: center; }
-        .side-menu .sponsorship-box img { max-width: 100%; border-radius: var(--border-radius); }
+
+        /* Correção para remover a linha divisória do botão de fechar e do link do anúncio */
+        .side-menu .close-btn,
+        .sponsorship-box a {
+            border-bottom: none;
+        }
+
+        .side-menu .sponsorship-box { margin-top: auto; padding: 20px; text-align: center; width: 100%; }
+        .side-menu .sponsorship-box img { max-width: 100%; border-radius: var(--border-radius); width: 100%; }
         #page-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 1000; display: none; transition: opacity 0.3s; }
         #page-overlay.show { display: block; }
-
-        .container { flex-grow: 1; padding: 20px; max-width: 800px; margin: 20px auto; background-color: var(--card-color); border-radius: var(--border-radius); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
-        h1 { color: var(--primary-color); text-align: center; margin-bottom: 20px; }
-        p, li { line-height: 1.6; margin-bottom: 15px; }
-        ul { padding-left: 20px; }
+        .container { max-width: 800px; margin: 20px auto; padding: 0 16px; }
+        .card { background-color: var(--card-color); padding: 20px; border-radius: var(--border-radius); margin-bottom: 20px; }
+        .card h1 { font-size: 1.5rem; border-bottom: 1px solid var(--input-bg-color); padding-bottom: 10px; margin-bottom: 20px; color: var(--primary-color); }
+        .card h2 { font-size: 1.2rem; margin-top: 20px; margin-bottom: 10px; color: var(--primary-color); }
+        .card p, .card li { font-size: 1rem; line-height: 1.5; color: var(--text-color); }
+        .card ul { list-style-type: none; padding: 0; }
+        .card li { margin-bottom: 10px; position: relative; padding-left: 20px; }
+        .card li::before { content: "•"; position: absolute; left: 0; color: var(--primary-color); font-weight: bold; }
         .footer { text-align: center; padding: 8px 16px; color: var(--secondary-text-color); font-size: 0.875rem; background-color: #282828; margin-top: auto; width: 100%; }
-        @media (max-width: 600px) { .side-menu.open { width: min(var(--menu-width), 80vw); } }
+        @media (max-width: 600px) {
+            .side-menu.open { width: min(var(--menu-width), 80vw); }
+        }
     </style>
 </head>
 <body>
@@ -50,8 +62,10 @@
         <a href="todos_exercicios.html">Todos Exercícios</a>
         <a href="personal.html">Personal Trainer</a>
         <a href="sobre.html">Sobre</a>
-        <div class="sponsorship-box" onclick="window.open('https://wa.me/+5511911111111?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20como%20anunciar%20meu%20perfil%20no%20app%20Meu%20Treino.', '_blank');" style="cursor: pointer;">
-    <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/anuncie_aqui.gif" alt="Anuncie Aqui">
+        <div class="sponsorship-box">
+            <a href="https://wa.me/+5511911111111?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20como%20anunciar%20meu%20perfil%20no%20app%20Meu%20Treino." target="_blank">
+                <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/anuncie_aqui.gif" alt="Anuncie Aqui">
+            </a>
         </div>
     </div>
     <div id="page-overlay" onclick="closeNav()"></div>
@@ -60,24 +74,30 @@
         <div class="header">
             <span class="menu-icon" onclick="openNav()">&#9776;</span>
             <a href="index.html" class="header-link">
-                <span class="title">Sobre</span>
+                <span class="title">
+                    <img src="https://raw.githubusercontent.com/Dex6354/MeuTreino/refs/heads/main/IconeTreino.jpg" alt="Ícone de Treino">
+                    Meu Treino
+                </span>
             </a>
-            <span class="placeholder"></span> </div>
+            <span class="placeholder"></span>
+        </div>
 
         <div class="container">
-            <h1>Sobre o Aplicativo Meu Treino</h1>
-            <p>Bem-vindo ao <b>Meu Treino</b>, o seu companheiro ideal para organizar e acompanhar seus treinos de forma simples e eficiente. Nosso objetivo é descomplicar a sua rotina na academia, permitindo que você foque no que realmente importa: seus resultados.</p>
-            <p>Com o Meu Treino, você pode:</p>
-            <ul>
-                <li>Gerenciar diferentes rotinas de treino (Treino A, B, C, D, E).</li>
-                <li>Adicionar, editar e remover exercícios facilmente.</li>
-                <li>Acompanhar séries, repetições e peso para cada exercício.</li>
-                <li>Marcar exercícios como concluídos e monitorar seu progresso.</li>
-                <li>Visualizar imagens e descrições detalhadas de cada exercício para garantir a execução correta.</li>
-                <li>Salvar e carregar seus treinos, garantindo que você nunca perca seu progresso.</li>
-                <li>Encontrar o Personal Trainer ideal para aprimorar sua rotina e seus treinos.</li>
-            </ul>
-            <p>Acreditamos que a consistência é a chave para o sucesso na jornada fitness, e o Meu Treino foi desenvolvido para te ajudar a manter essa consistência. Treine mais inteligente, não mais difícil.</p>
+            <div class="card">
+                <h1>Sobre o Meu Treino</h1>
+                <p>O Meu Treino é uma aplicação web simples e intuitiva, desenvolvida por entusiastas do fitness para ajudar pessoas a organizarem e acompanharem seus treinos de forma eficiente. Nossa missão é tornar a jornada fitness mais acessível, organizada e motivadora para todos.</p>
+                <h2>Nossos Recursos Principais</h2>
+                <ul>
+                    <li>Criação e gerenciamento de rotinas de treino (Treino A, B, C, D, E).</li>
+                    <li>Adicionar, editar e remover exercícios facilmente.</li>
+                    <li>Acompanhar séries, repetições e peso para cada exercício.</li>
+                    <li>Marcar exercícios como concluídos e monitorar seu progresso.</li>
+                    <li>Visualizar imagens e descrições detalhadas de cada exercício para garantir a execução correta.</li>
+                    <li>Salvar e carregar seus treinos, garantindo que você nunca perca seu progresso.</li>
+                    <li>Encontrar o Personal Trainer ideal para aprimorar sua rotina e seus treinos.</li>
+                </ul>
+                <p>Acreditamos que a consistência é a chave para o sucesso na jornada fitness, e o Meu Treino foi desenvolvido para te ajudar a manter essa consistência. Treine mais inteligente, não mais difícil.</p>
+            </div>
         </div>
 
         <footer class="footer">
