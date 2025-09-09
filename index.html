@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Treino</title>
-    <link rel="icon" href="https://raw.githubusercontent.com/Dex6354/MeuTreino/refs/heads/main/Favicon.png" type="image/jpg">
+    <link rel="icon" href="https://raw.githubusercontent.com/Dex654/MeuTreino/refs/heads/main/Favicon.png" type="image/jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
     <style>
@@ -234,6 +234,10 @@
             margin: 0;
             padding: 0;
         }
+        /* Cor amarela para o texto do título da aba ativa */
+        .tabs .tab-link.active .tab-title {
+            color: var(--primary-color);
+        }
         .tabs .tab-link input {
             background: none;
             border: none;
@@ -300,7 +304,12 @@
         .exercise-card .video-placeholder img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.2s ease-in-out; border-radius: var(--border-radius); }
         .exercise-card .video-placeholder .error-message { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--secondary-text-color); font-size: 0.8rem; display: none; text-align: center; padding: 5px; }
         .exercise-card .content { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; position: relative; }
-        .exercise-card .content .name-container { position: relative; width: 100%; padding-right: 40px; }
+        .exercise-card .content .name-container { 
+            position: relative; 
+            width: 100%; 
+            /* Aumento do padding para evitar sobreposição com o switch */
+            padding-right: 50px; 
+        }
         .exercise-card .content .name-container h3 { margin: 0 0 8px 0; font-size: 1rem; font-weight: bold; word-wrap: break-word; word-break: break-word; }
         .exercise-card .content .name-container .editable-name { width: 100%; background: none; border: none; color: var(--text-color); padding: 0; outline: none; border-bottom: 1px solid transparent; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 1rem; font-weight: bold; min-height: 2.2em; resize: vertical; overflow: hidden; }
         .exercise-card .content .name-container .editable-name:focus { border-bottom: 1px solid var(--primary-color); }
@@ -403,7 +412,7 @@
             <span class="menu-icon" onclick="openNav()">&#9776;</span>
             <a href="index.html" class="header-link">
                 <span class="title">
-                    <img src="https://raw.githubusercontent.com/Dex6354/MeuTreino/refs/heads/main/IconeTreino.jpg" alt="Ícone de Treino">
+                    <img src="https://raw.githubusercontent.com/Dex654/MeuTreino/refs/heads/main/IconeTreino.jpg" alt="Ícone de Treino">
                     Meu Treino
                 </span>
             </a>
@@ -737,7 +746,7 @@
             const container = document.getElementById('exercise-container');
             container.innerHTML = '';
             const isEditingMode = isEditing;
-            const defaultImage = "https://raw.githubusercontent.com/Dex6354/MeuTreino/refs/heads/main/IconeTreino.jpg";
+            const defaultImage = "https://raw.githubusercontent.com/Dex654/MeuTreino/refs/heads/main/IconeTreino.jpg";
             data.forEach((workout) => {
                 const card = document.createElement('div');
                 card.className = 'exercise-card';
@@ -821,7 +830,7 @@
                 updateAutocompletePosition();
                 if (inputText.length < 1) { autocompleteSuggestions.style.display = 'none'; return; }
                 const filteredExercises = exerciciosList.filter(ex => ex.nome.toLowerCase().includes(inputText));
-                if (filteredExercises.length > 0) { const suggestionsHTML = filteredExercises.map(ex => `<div class="suggestion-item" data-name="${ex.nome}" data-image="${ex.gif_url}"><img src="${ex.gif_url}" alt="${ex.nome}" onerror="this.src='https://raw.githubusercontent.com/Dex6354/MeuTreino/refs/heads/main/IconeTreino.jpg';"><span>${ex.nome}</span></div>`).join(''); autocompleteSuggestions.innerHTML = suggestionsHTML; autocompleteSuggestions.style.display = 'block'; } else { autocompleteSuggestions.style.display = 'none'; }
+                if (filteredExercises.length > 0) { const suggestionsHTML = filteredExercises.map(ex => `<div class="suggestion-item" data-name="${ex.nome}" data-image="${ex.gif_url}"><img src="${ex.gif_url}" alt="${ex.nome}" onerror="this.src='https://raw.githubusercontent.com/Dex654/MeuTreino/refs/heads/main/IconeTreino.jpg';"><span>${ex.nome}</span></div>`).join(''); autocompleteSuggestions.innerHTML = suggestionsHTML; autocompleteSuggestions.style.display = 'block'; } else { autocompleteSuggestions.style.display = 'none'; }
             }, 100);
             window.addEventListener('scroll', updateAutocompletePosition, true);
             document.querySelectorAll('.editable-name').forEach(input => {
