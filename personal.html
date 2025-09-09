@@ -7,145 +7,45 @@
     <link rel="icon" href="https://raw.githubusercontent.com/Dex6354/MeuTreino/refs/heads/main/Favicon.png" type="image/jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Estilos base e do cabeçalho de sobre.html */
         :root {
-            --bg-color: #212121; /* Fundo mais escuro */
-            --card-color: #2c2c2c; /* Cor do card ligeiramente mais clara */
+            --bg-color: #212121;
+            --card-color: #2c2c2c;
             --text-color: #f0f0f0;
             --secondary-text-color: #a0a0a0;
             --primary-color: #ffc107;
-            --border-radius: 12px; /* Borda mais arredondada */
+            --border-radius: 12px;
             --input-bg-color: #383838;
-            --menu-width: 250px; /* Menu um pouco mais largo */
+            --menu-width: 250px;
         }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            overflow-x: hidden;
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
+        *, *::before, *::after { box-sizing: border-box; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--input-bg-color); position: sticky; top: 0; z-index: 10; background-color: var(--bg-color); }
+        .header .menu-icon { font-size: 1.5rem; cursor: pointer; color: var(--text-color); padding: 5px; }
+        .header .header-link { text-decoration: none; color: inherit; position: absolute; left: 50%; transform: translateX(-50%); }
+        .header .title { font-size: 1.25rem; font-weight: bold; display: flex; align-items: center; }
+        .header .title img { width: 24px; height: 24px; margin-right: 8px; border-radius: 5px; }
+        .header .placeholder { width: 40px; }
+        .side-menu { height: 100%; width: 0; position: fixed; z-index: 1001; top: 0; left: 0; background-color: var(--card-color); overflow-x: hidden; transition: 0.3s; padding-top: 60px; box-shadow: 2px 0 5px rgba(0,0,0,0.5); display: flex; flex-direction: column; }
+        .side-menu.open { width: var(--menu-width); }
+        .side-menu .close-btn { position: absolute; top: 15px; right: 25px; font-size: 2rem; color: var(--text-color); cursor: pointer; }
+        .side-menu a { padding: 15px 20px; text-decoration: none; font-size: 1.1rem; color: var(--text-color); display: block; transition: 0.3s; border-bottom: 1px solid var(--input-bg-color); }
+        .side-menu a:hover { background-color: #575757; color: var(--primary-color); }
+        .side-menu .close-btn,
+        .sponsorship-box a {
+            border-bottom: none;
         }
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--input-bg-color);
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background-color: var(--bg-color);
-        }
-        .header .menu-icon {
-            font-size: 1.75rem; /* Ícone maior */
-            cursor: pointer;
-            color: var(--primary-color);
-            padding: 5px;
-        }
-        .header .header-link {
-            text-decoration: none;
-            color: inherit;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .header .title {
-            font-size: 1.5rem; /* Título maior */
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-        }
-        .header .title img {
-            width: 28px; /* Ícone do título maior */
-            height: 28px;
-            margin-right: 12px;
-            border-radius: 8px;
-        }
-        .header .placeholder {
-            width: 40px;
-        }
-        .side-menu {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1001;
-            top: 0;
-            left: 0;
-            background-color: var(--card-color);
-            overflow-x: hidden;
-            transition: 0.4s;
-            padding-top: 70px;
-            box-shadow: 4px 0 15px rgba(0,0,0,0.5);
-            display: flex;
-            flex-direction: column;
-        }
-        .side-menu.open {
-            width: var(--menu-width);
-        }
-        .side-menu .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .side-menu .nav-link {
-            padding: 18px 25px;
-            text-decoration: none;
-            font-size: 1.2rem;
-            color: var(--text-color);
-            display: block;
-            transition: 0.3s;
-            border-bottom: 1px solid #333;
-        }
-        .side-menu .nav-link:hover {
-            background-color: #383838;
-            color: var(--primary-color);
-        }
-        .side-menu .sponsorship-box {
-            margin-top: auto;
-            padding: 25px;
-            text-align: center;
-        }
-        .side-menu .sponsorship-box img {
-            max-width: 180px; /* Tamanho da imagem de anúncio ajustado */
-            width: 100%;
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-            display: block;
-            margin: 0 auto;
-        }
-        #page-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            display: none;
-            transition: opacity 0.4s;
-        }
-        #page-overlay.show {
-            display: block;
-        }
-
+        .side-menu .sponsorship-box { margin-top: auto; padding: 20px; text-align: center; width: 100%; }
+        .side-menu .sponsorship-box img { max-width: 100%; border-radius: var(--border-radius); width: 100%; }
+        #page-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 1000; display: none; transition: opacity 0.3s; }
+        #page-overlay.show { display: block; }
+        
+        /* Estilos específicos do conteúdo de personal.html */
         .container {
             flex-grow: 1;
             padding: 20px;
             max-width: 900px;
             margin: 20px auto;
-            background-color: var(--card-color);
-            border-radius: var(--border-radius);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
             text-align: center;
         }
         h1 {
@@ -160,12 +60,13 @@
             margin-top: 30px;
             padding: 25px;
             border-radius: var(--border-radius);
-            background-color: var(--input-bg-color);
+            background-color: var(--card-color);
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
         .personal-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
         }
         .personal-card img {
             width: 150px;
@@ -197,7 +98,6 @@
         .contact-links a:hover {
             color: #ffd766;
         }
-
         .ad-card {
             background: none;
             border: 2px dashed var(--primary-color);
@@ -205,7 +105,7 @@
             transition: background-color 0.3s;
         }
         .ad-card:hover {
-            background-color: #383838;
+            background-color: var(--input-bg-color);
         }
         .ad-card h2 {
             color: var(--primary-color);
@@ -216,22 +116,13 @@
             align-items: center;
         }
 
-        .footer {
-            text-align: center;
-            padding: 12px 16px;
-            color: var(--secondary-text-color);
-            font-size: 0.9rem;
-            background-color: #1e1e1e;
-            margin-top: auto;
-            width: 100%;
-            border-top: 1px solid #333;
-        }
+        /* Estilo do rodapé de sobre.html */
+        .footer { text-align: center; padding: 8px 16px; color: var(--secondary-text-color); font-size: 0.875rem; background-color: #282828; margin-top: auto; width: 100%; }
+        
+        /* Media Queries */
         @media (max-width: 600px) {
             .side-menu.open {
                 width: min(var(--menu-width), 80vw);
-            }
-            .header .title {
-                font-size: 1.25rem;
             }
             .personal-card img {
                 width: 120px;
@@ -250,12 +141,14 @@
 
     <div id="side-menu" class="side-menu">
         <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
-        <a href="index.html" class="nav-link">Meu Treino</a>
-        <a href="todos_exercicios.html" class="nav-link">Todos Exercícios</a>
-        <a href="personal.html" class="nav-link">Personal Trainer</a>
-        <a href="sobre.html" class="nav-link">Sobre</a>
-        <div class="sponsorship-box" onclick="window.open('https://wa.me/+5511911111111?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20como%20anunciar%20meu%20perfil%20no%20app%20Meu%20Treino.', '_blank');" style="cursor: pointer;">
-            <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/anuncie_aqui.gif" alt="Anuncie Aqui">
+        <a href="index.html">Meu Treino</a>
+        <a href="todos_exercicios.html">Todos Exercícios</a>
+        <a href="personal.html">Personal Trainer</a>
+        <a href="sobre.html">Sobre</a>
+        <div class="sponsorship-box">
+            <a href="https://wa.me/+5511911111111?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20como%20anunciar%20meu%20perfil%20no%20app%20Meu%20Treino." target="_blank">
+                <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/anuncie_aqui.gif" alt="Anuncie Aqui">
+            </a>
         </div>
     </div>
     <div id="page-overlay" onclick="closeNav()"></div>
