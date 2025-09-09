@@ -108,7 +108,7 @@
             overflow-x: hidden;
             transition: 0.3s;
             padding-top: 60px;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.5);
             display: flex;
             flex-direction: column;
         }
@@ -124,6 +124,7 @@
             font-size: 2rem;
             color: var(--text-color);
             cursor: pointer;
+            line-height: 1;
         }
 
         .side-menu a {
@@ -142,7 +143,7 @@
         }
 
         .side-menu .sponsorship-box {
-            margin-top: auto; /* Empurra para o final */
+            margin-top: auto;
             padding: 20px;
             text-align: center;
         }
@@ -161,7 +162,7 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.7);
             z-index: 1000;
-            display: none; /* Começa oculto */
+            display: none;
             transition: opacity 0.3s;
         }
         #page-overlay.show {
@@ -172,12 +173,120 @@
             transition: margin-left .3s;
         }
 
-        /* O resto do seu CSS continua aqui... */
-        .tabs { display: flex; justify-content: space-around; padding: 12px; background-color: var(--bg-color); position: sticky; top: 49px; z-index: 9; border-bottom: 1px solid var(--input-bg-color); }
-        .tabs .tab-item { display: flex; flex-direction: column; align-items: center; }
-        .tabs .tab-item a, .tabs .tab-item input { color: var(--secondary-text-color); font-weight: bold; text-decoration: none; padding-bottom: 8px; transition: color 0.3s, border-bottom 0.3s; background: none; border: none; text-align: center; font-size: 1rem; width: 80px; outline: none; }
-        .tabs .tab-item a.active, .tabs .tab-item input:focus { color: var(--primary-color); border-bottom: 2px solid var(--primary-color); }
-        .exercise-card { display: flex; background-color: var(--card-color); border-radius: var(--border-radius); margin-bottom: 16px; overflow: visible; position: relative; width: 100%; max-width: 100%; }
+        /* --- TABS --- */
+        .tabs {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 16px;
+            background-color: var(--bg-color);
+            position: sticky;
+            top: 49px;
+            z-index: 9;
+            border-bottom: 1px solid var(--input-bg-color);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            gap: 8px;
+        }
+        .tabs::-webkit-scrollbar {
+            display: none;
+        }
+        .tabs .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .tabs .tab-link {
+            background: none;
+            border: none;
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            padding: 8px 12px;
+            transition: color 0.3s;
+            text-align: center;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            white-space: nowrap;
+        }
+        .tabs .tab-link.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        .tabs .tab-link .tab-title {
+            color: var(--text-color);
+            font-size: 1rem;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+        }
+        .tabs .tab-link input {
+            background: none;
+            border: none;
+            color: var(--secondary-text-color);
+            font-size: 0.8rem;
+            font-weight: normal;
+            text-align: center;
+            outline: none;
+            max-width: 100px;
+            margin: 0;
+            padding: 0;
+        }
+        .tabs .tab-link span {
+            font-size: 0.8rem;
+            color: var(--secondary-text-color);
+            font-weight: normal;
+        }
+        .tabs .tab-remove-btn {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #f44336;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            opacity: 0;
+        }
+        .tabs.editing .tab-remove-btn {
+            opacity: 1;
+        }
+        .tabs .add-tab-btn {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .exercise-card {
+            display: flex;
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            margin-bottom: 16px;
+            overflow: visible;
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+        }
         .exercise-card.sortable-chosen { background-color: #4CAF50; transform: scale(1.05); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); }
         .exercise-card .video-placeholder { min-width: var(--image-size-desktop); height: var(--image-size-desktop); background-color: #000; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border-radius: var(--border-radius); overflow: hidden; position: relative; cursor: pointer; }
         .exercise-card .video-placeholder img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.2s ease-in-out; border-radius: var(--border-radius); }
@@ -340,24 +449,16 @@
         }
         document.addEventListener('keydown', (event) => { if (event.key === "Escape") closeNav(); });
 
-        // O resto do seu JavaScript principal...
         let exerciciosList = [];
-        let currentTab = 'treino-a';
+        let currentTab = '';
         let isEditing = false;
         let sortableInstance = null;
-        let tabToEdit = null; 
 
-        let workouts = {
-            'treino-a': JSON.parse(localStorage.getItem('treino-a')) || [],
-            'treino-b': JSON.parse(localStorage.getItem('treino-b')) || [],
-            'treino-c': JSON.parse(localStorage.getItem('treino-c')) || []
-        };
+        const maxTabs = 5;
+        const alphabet = ['A', 'B', 'C', 'D', 'E'];
 
-        let tabNames = JSON.parse(localStorage.getItem('tabNames')) || {
-            'treino-a': 'A (Costas)',
-            'treino-b': 'B (Perna)',
-            'treino-c': 'C (Peito)'
-        };
+        let workouts = JSON.parse(localStorage.getItem('workouts')) || {};
+        let tabNames = JSON.parse(localStorage.getItem('tabNames')) || {};
 
         const autocompleteSuggestions = document.getElementById('autocomplete-suggestions');
         let currentActiveInput = null;
@@ -384,51 +485,137 @@
         }
 
         function iniciarApp() {
-            const savedWorkoutsA = JSON.parse(localStorage.getItem('treino-a'));
-            if (savedWorkoutsA) workouts['treino-a'] = savedWorkoutsA;
-            const savedWorkoutsB = JSON.parse(localStorage.getItem('treino-b'));
-            if (savedWorkoutsB) workouts['treino-b'] = savedWorkoutsB;
-            const savedWorkoutsC = JSON.parse(localStorage.getItem('treino-c'));
-            if (savedWorkoutsC) workouts['treino-c'] = savedWorkoutsC;
-            const savedTabNames = JSON.parse(localStorage.getItem('tabNames'));
-            if (savedTabNames) tabNames = savedTabNames;
-            const lastActiveTab = localStorage.getItem('lastActiveTab');
-            showTab(lastActiveTab || 'treino-a', true);
+            if (Object.keys(workouts).length === 0) {
+                workouts = {
+                    'treino-a': [],
+                    'treino-b': [],
+                    'treino-c': []
+                };
+                tabNames = {
+                    'treino-a': { title: 'A', subtitle: '(Costas)' },
+                    'treino-b': { title: 'B', subtitle: '(Perna)' },
+                    'treino-c': { title: 'C', subtitle: '(Peito)' }
+                };
+                saveAllData();
+            }
+            const lastActiveTab = localStorage.getItem('lastActiveTab') || Object.keys(workouts)[0];
+            showTab(lastActiveTab, true);
             updateLastWorkoutInfo();
         }
 
-        function saveTabNames() { localStorage.setItem('tabNames', JSON.stringify(tabNames)); }
-        function updateTabName(element, tabId) { tabNames[tabId] = element.value; saveTabNames(); }
-        function handleTabClick(tabId) { if (!isEditing) { showTab(tabId); return; } if (tabId !== currentTab) { tabToEdit = null; showTab(tabId); } else { tabToEdit = tabId; renderTabs(); } }
+        function saveAllData() {
+            localStorage.setItem('workouts', JSON.stringify(workouts));
+            localStorage.setItem('tabNames', JSON.stringify(tabNames));
+        }
+
+        function updateTabName(element, tabId) {
+            tabNames[tabId].subtitle = element.value;
+            saveAllData();
+        }
+
+        function handleTabClick(tabId) {
+            if (isEditing && tabId === currentTab) {
+                // Segundo clique na mesma aba em modo de edição, foca no input de subtítulo
+                const tabItem = document.querySelector(`.tab-item[data-tab='${tabId}']`);
+                const subtitleInput = tabItem.querySelector('input');
+                if (subtitleInput) {
+                    subtitleInput.focus();
+                }
+            } else {
+                // Primeiro clique em uma aba ou clique em uma aba diferente
+                showTab(tabId);
+            }
+        }
+
         function renderTabs() {
             const tabsContainer = document.querySelector('.tabs');
             tabsContainer.innerHTML = '';
-            for (const tabId in tabNames) {
+            const tabIds = Object.keys(tabNames).sort();
+            tabIds.forEach(tabId => {
                 const tabItem = document.createElement('span');
                 tabItem.className = 'tab-item';
                 tabItem.dataset.tab = tabId;
-                let tabContent;
-                if (isEditing && tabId === tabToEdit) {
-                    tabContent = document.createElement('input');
-                    tabContent.type = 'text';
-                    tabContent.value = tabNames[tabId];
-                    tabContent.className = 'tab-link';
-                    tabContent.onblur = () => { updateTabName(tabContent, tabId); tabToEdit = null; renderTabs(); };
-                    tabContent.onkeydown = (e) => { if (e.key === 'Enter') { e.preventDefault(); tabContent.blur(); } };
-                    setTimeout(() => tabContent.focus(), 0);
+
+                const tabContent = document.createElement('a');
+                tabContent.href = '#';
+                tabContent.className = 'tab-link';
+                tabContent.onclick = () => handleTabClick(tabId);
+
+                const titleElement = document.createElement('span');
+                titleElement.className = 'tab-title';
+                titleElement.textContent = tabNames[tabId].title;
+
+                let subtitleElement;
+                if (isEditing) {
+                    subtitleElement = document.createElement('input');
+                    subtitleElement.type = 'text';
+                    subtitleElement.value = tabNames[tabId].subtitle;
+                    subtitleElement.onblur = () => { updateTabName(subtitleElement, tabId); };
+                    subtitleElement.onkeydown = (e) => { if (e.key === 'Enter') { e.preventDefault(); subtitleElement.blur(); } };
                 } else {
-                    tabContent = document.createElement('a');
-                    tabContent.href = '#';
-                    tabContent.className = 'tab-link';
-                    tabContent.onclick = () => handleTabClick(tabId);
-                    tabContent.textContent = tabNames[tabId];
+                    subtitleElement = document.createElement('span');
+                    subtitleElement.textContent = tabNames[tabId].subtitle;
                 }
-                if (tabId === currentTab) { tabContent.classList.add('active'); }
+
+                tabContent.appendChild(titleElement);
+                tabContent.appendChild(subtitleElement);
                 tabItem.appendChild(tabContent);
+
+                if (isEditing && tabIds.length > 1) {
+                    const removeBtn = document.createElement('div');
+                    removeBtn.className = 'tab-remove-btn';
+                    removeBtn.innerHTML = '&times;';
+                    removeBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        removeTab(tabId);
+                    };
+                    tabItem.appendChild(removeBtn);
+                }
+
+                if (tabId === currentTab) {
+                    tabContent.classList.add('active');
+                }
                 tabsContainer.appendChild(tabItem);
+            });
+
+            if (isEditing && tabIds.length < maxTabs) {
+                const addTabBtn = document.createElement('div');
+                addTabBtn.className = 'add-tab-btn';
+                addTabBtn.innerHTML = '<i class="fas fa-plus"></i>';
+                addTabBtn.onclick = addTab;
+                tabsContainer.appendChild(addTabBtn);
             }
         }
-        function saveWorkout() { localStorage.setItem(currentTab, JSON.stringify(workouts[currentTab])); }
+
+        function addTab() {
+            const tabIds = Object.keys(workouts).length;
+            if (tabIds >= maxTabs) return;
+
+            const newTabId = `treino-${alphabet[tabIds].toLowerCase()}`;
+            const newTabTitle = alphabet[tabIds];
+            const newTabSubtitle = '(Novo)';
+
+            workouts[newTabId] = [];
+            tabNames[newTabId] = { title: newTabTitle, subtitle: newTabSubtitle };
+            saveAllData();
+            showTab(newTabId);
+        }
+
+        function removeTab(tabId) {
+            if (Object.keys(workouts).length <= 1) {
+                alert('É necessário ter pelo menos um treino.');
+                return;
+            }
+            if (confirm('Tem certeza que deseja remover este treino? Todos os exercícios serão perdidos.')) {
+                delete workouts[tabId];
+                delete tabNames[tabId];
+                saveAllData();
+                const newTabId = Object.keys(workouts)[0];
+                showTab(newTabId);
+            }
+        }
+
+        function saveWorkout() { localStorage.setItem('workouts', JSON.stringify(workouts)); }
         function updateWorkout(element) {
             const card = element.closest('.exercise-card');
             const cardIndex = Array.from(card.parentNode.children).indexOf(card);
@@ -457,8 +644,8 @@
         function resetAllSwitches() {
             for (let tab in workouts) {
                 workouts[tab].forEach(ex => ex.completed = false);
-                localStorage.setItem(tab, JSON.stringify(workouts[tab]));
             }
+            saveWorkout();
             renderWorkouts(workouts[currentTab]);
         }
         function checkWorkoutCompletion() {
@@ -478,7 +665,7 @@
         function saveLastWorkout() {
             const today = new Date();
             const date = today.toLocaleDateString('pt-BR');
-            const workout = tabNames[currentTab];
+            const workout = tabNames[currentTab].title;
             localStorage.setItem('last-workout', JSON.stringify({ name: workout, date }));
             updateLastWorkoutInfo();
         }
@@ -497,7 +684,19 @@
                 saveWorkout();
             }
         }
-        function handleEditSave() { isEditing = !isEditing; tabToEdit = null; if (!isEditing) { saveWorkout(); } renderTabs(); renderWorkouts(workouts[currentTab]); updateButtonState(); }
+        function handleEditSave() {
+            isEditing = !isEditing;
+            const tabsContainer = document.querySelector('.tabs');
+            if (isEditing) {
+                tabsContainer.classList.add('editing');
+            } else {
+                tabsContainer.classList.remove('editing');
+            }
+            saveAllData();
+            renderTabs();
+            renderWorkouts(workouts[currentTab]);
+            updateButtonState();
+        }
         function updateButtonState() {
             const editButton = document.getElementById('edit-save-btn');
             const fabContainer = document.getElementById('fab-buttons-container');
@@ -558,7 +757,7 @@
             imageModal.style.display = 'flex';
         }
         function closeImageModal() { document.getElementById('image-modal').style.display = 'none'; }
-        function saveWorkoutToFile() { const data = JSON.stringify(workouts, null, 2); const blob = new Blob([data], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); const today = new Date().toISOString().slice(0, 10); a.download = `meu-treino-${today}.json`; a.href = url; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); }
+        function saveWorkoutToFile() { const data = JSON.stringify({ workouts, tabNames }, null, 2); const blob = new Blob([data], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); const today = new Date().toISOString().slice(0, 10); a.download = `meu-treino-${today}.json`; a.href = url; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); }
         function loadWorkoutFromFile() {
             const input = document.createElement('input');
             input.type = 'file';
@@ -570,11 +769,10 @@
                 reader.onload = (event) => {
                     try {
                         const loadedData = JSON.parse(event.target.result);
-                        if (loadedData['treino-a'] && loadedData['treino-b'] && loadedData['treino-c']) {
-                            workouts = loadedData;
-                            localStorage.setItem('treino-a', JSON.stringify(workouts['treino-a']));
-                            localStorage.setItem('treino-b', JSON.stringify(workouts['treino-b']));
-                            localStorage.setItem('treino-c', JSON.stringify(workouts['treino-c']));
+                        if (loadedData.workouts && loadedData.tabNames) {
+                            workouts = loadedData.workouts;
+                            tabNames = loadedData.tabNames;
+                            saveAllData();
                             alert('Treinos carregados com sucesso!');
                             location.reload();
                         } else { alert('O arquivo não é um backup de treino válido.'); }
@@ -584,7 +782,14 @@
             };
             input.click();
         }
-        function showTab(tabName, isInitialLoad = false) { currentTab = tabName; if (!isInitialLoad) { tabToEdit = null; } autocompleteSuggestions.style.display = 'none'; renderTabs(); renderWorkouts(workouts[currentTab]); updateButtonState(); localStorage.setItem('lastActiveTab', tabName); }
+        function showTab(tabId, isInitialLoad = false) {
+            currentTab = tabId;
+            autocompleteSuggestions.style.display = 'none';
+            renderTabs();
+            renderWorkouts(workouts[currentTab]);
+            updateButtonState();
+            localStorage.setItem('lastActiveTab', tabId);
+        }
         function setupAutocomplete() {
             function updateAutocompletePosition() { if (currentActiveInput && autocompleteSuggestions.style.display === 'block') { const rect = currentActiveInput.getBoundingClientRect(); autocompleteSuggestions.style.top = `${rect.bottom + window.scrollY}px`; autocompleteSuggestions.style.left = `${rect.left + window.scrollX}px`; autocompleteSuggestions.style.width = `${rect.width}px`; } }
             const handleInput = debounce((event) => {
