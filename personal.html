@@ -23,53 +23,54 @@
         .header .menu-icon { font-size: 1.5rem; cursor: pointer; color: var(--text-color); padding: 5px; }
         .header .header-link { text-decoration: none; color: inherit; position: absolute; left: 50%; transform: translateX(-50%); }
         .header .title { font-size: 1.25rem; font-weight: bold; display: flex; align-items: center; }
-        .header .title img { width: 24px; height: 24px; margin-right: 8px; border-radius: 5px; }
         .header .placeholder { width: 40px; }
-        .side-menu { height: 100%; width: 0; position: fixed; z-index: 1001; top: 0; left: 0; background-color: var(--card-color); overflow-x: hidden; transition: 0.3s; padding-top: 60px; box-shadow: 2px 0 5px rgba(0,0,0,0.5); display: flex; flex-direction: column; }
+        .side-menu { height: 100%; width: 0; position: fixed; z-index: 1001; top: 0; left: 0; background-color: var(--card-color); overflow-x: hidden; transition: 0.3s; padding-top: 60px; box-shadow: 3px 0 10px rgba(0,0,0,0.3); display: flex; flex-direction: column; }
         .side-menu.open { width: var(--menu-width); }
-        .side-menu .close-btn { position: absolute; top: 15px; right: 25px; font-size: 2rem; color: var(--text-color); cursor: pointer; }
-        .side-menu a { padding: 15px 20px; text-decoration: none; font-size: 1.1rem; color: var(--text-color); display: block; transition: 0.3s; border-bottom: 1px solid var(--input-bg-color); }
-        .side-menu a:hover { background-color: #575757; color: var(--primary-color); }
-        .side-menu .close-btn,
-        .sponsorship-box a {
-            border-bottom: none;
-        }
-        .side-menu .sponsorship-box { margin-top: auto; padding: 20px; text-align: center; width: 100%; }
-        .side-menu .sponsorship-box img { max-width: 180px; border-radius: var(--border-radius); width: 100%; display: block; margin: 0 auto; }
+        .side-menu .close-btn { position: absolute; top: 15px; right: 25px; font-size: 2rem; color: var(--text-color); cursor: pointer; text-decoration: none; }
+        .side-menu .nav-link { padding: 15px 20px; text-decoration: none; font-size: 1.1rem; color: var(--text-color); display: block; transition: 0.3s; border-bottom: 1px solid var(--input-bg-color); }
+        .side-menu .nav-link:hover { background-color: #575757; color: var(--primary-color); }
+        .side-menu .sponsorship-box { margin-top: auto; padding: 20px; text-align: center; }
+        .side-menu .sponsorship-box img { max-width: 100%; border-radius: var(--border-radius); }
         #page-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 1000; display: none; transition: opacity 0.3s; }
         #page-overlay.show { display: block; }
 
-        .container { max-width: 800px; margin: 20px auto; padding: 0 16px; }
-        .personal-card { background-color: var(--card-color); border-radius: var(--border-radius); padding: 20px; margin-bottom: 20px; text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); }
-        .personal-card h1 { color: var(--text-color); font-size: 1.5rem; margin-top: 0; }
-        .personal-card h2 { color: var(--primary-color); margin-top: 0; }
-        .personal-card .profile-image { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary-color); margin-bottom: 10px; }
-        .personal-card p { color: var(--secondary-text-color); font-size: 0.9rem; }
-        .personal-card .contact-links { margin-top: 15px; }
-        .personal-card .contact-links a { color: var(--text-color); font-size: 2rem; margin: 0 10px; transition: color 0.3s; }
-        .personal-card .contact-links a:hover { color: var(--primary-color); }
-        .personal-card.ad-card { background-color: #383838; border: 2px dashed var(--primary-color); cursor: pointer; }
-        .personal-card.ad-card h2 { color: var(--text-color); }
-        .personal-card.ad-card p { color: var(--secondary-text-color); }
-        .personal-card.ad-card .contact-links i { font-size: 2rem; color: var(--primary-color); }
-        .footer { text-align: center; padding: 8px 16px; color: var(--secondary-text-color); font-size: 0.875rem; background-color: #282828; margin-top: auto; width: 100%; }
-        @media (max-width: 600px) {
-            .side-menu.open { width: min(var(--menu-width), 80vw); }
+        .container { flex-grow: 1; padding: 20px; max-width: 800px; margin: 20px auto; background-color: var(--card-color); border-radius: var(--border-radius); box-shadow: 0 4px 8px rgba(0,0,0,0.2); text-align: center; }
+        h1 { color: var(--primary-color); margin-bottom: 20px; }
+        .personal-card { display: flex; flex-direction: column; align-items: center; margin-top: 25px; padding: 15px; border-radius: var(--border-radius); background-color: var(--input-bg-color); }
+        .personal-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 3px solid var(--primary-color); }
+        .personal-card h2 { color: var(--text-color); margin: 0 0 5px; }
+        .personal-card p { color: var(--secondary-text-color); margin: 0 0 10px; line-height: 1.5; }
+        .contact-links a { color: var(--primary-color); text-decoration: none; margin: 0 10px; font-size: 1.2rem; transition: color 0.3s; }
+        .contact-links a:hover { color: #ffd54f; }
+
+        /* Estilo para o card de anúncio */
+        .ad-card {
+            background: none;
+            border: 2px dashed var(--primary-color);
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
+        .ad-card:hover {
+            background-color: #383838;
+        }
+        .ad-card h2 {
+            color: var(--primary-color);
+        }
+
+        .footer { text-align: center; padding: 8px 16px; color: var(--secondary-text-color); font-size: 0.875rem; background-color: #282828; margin-top: auto; width: 100%; }
+        @media (max-width: 600px) { .side-menu.open { width: min(var(--menu-width), 80vw); } }
     </style>
 </head>
 <body>
 
     <div id="side-menu" class="side-menu">
         <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
-        <a href="index.html">Meu Treino</a>
-        <a href="todos_exercicios.html">Todos Exercícios</a>
-        <a href="personal.html">Personal Trainer</a>
-        <a href="sobre.html">Sobre</a>
-        <div class="sponsorship-box">
-            <a href="https://wa.me/+5511911111111?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20como%20anunciar%20meu%20perfil%20no%20app%20Meu%20Treino." target="_blank">
-                <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/anuncie_aqui.gif" alt="Anuncie Aqui">
-            </a>
+        <a href="index.html" class="nav-link">Meu Treino</a>
+        <a href="todos_exercicios.html" class="nav-link">Todos Exercícios</a>
+        <a href="personal.html" class="nav-link">Personal Trainer</a>
+        <a href="sobre.html" class="nav-link">Sobre</a>
+        <div class="sponsorship-box" onclick="window.open('https://wa.me/+5511911111111?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20como%20anunciar%20meu%20perfil%20no%20app%20Meu%20Treino.', '_blank');" style="cursor: pointer;">
+    <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/anuncie_aqui.gif" alt="Anuncie Aqui">
         </div>
     </div>
     <div id="page-overlay" onclick="closeNav()"></div>
@@ -78,10 +79,7 @@
         <div class="header">
             <span class="menu-icon" onclick="openNav()">&#9776;</span>
             <a href="index.html" class="header-link">
-                <span class="title">
-                    <img src="https://raw.githubusercontent.com/Dex6354/MeuTreino/refs/heads/main/IconeTreino.jpg" alt="Ícone de Treino">
-                    Meu Treino
-                </span>
+                <span class="title">Personal Trainer</span>
             </a>
             <span class="placeholder"></span>
         </div>
@@ -91,7 +89,7 @@
             <p>Os profissionais estão prontos para te ajudar a alcançar seus objetivos fitness com planos personalizados e acompanhamento dedicado.</p>
 
             <div class="personal-card">
-                <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/personal1.gif" alt="Foto do Personal Trainer João Silva" class="profile-image">
+                <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/personal1.gif" alt="Foto do Personal Trainer João Silva">
                 <h2>João Silva</h2>
                 <p>Especialista em ganho de massa muscular e treinamento de força.</p>
                 <p><b>Experiência:</b> 10 anos</p>
@@ -102,7 +100,7 @@
             </div>
 
             <div class="personal-card">
-                <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/personal1.gif" alt="Foto da Personal Trainer Maria Souza" class="profile-image">
+                <img src="https://raw.githubusercontent.com/gymbr/meutreino/refs/heads/main/personal1.gif" alt="Foto da Personal Trainer Maria Souza">
                 <h2>Maria Souza</h2>
                 <p>Focada em emagrecimento, condicionamento físico e bem-estar.</p>
                 <p><b>Experiência:</b> 8 anos</p>
@@ -134,7 +132,8 @@
         function closeNav() {
             document.getElementById("side-menu").classList.remove('open');
             document.getElementById("page-overlay").classList.remove('show');
-        }
+       
+ }
         document.addEventListener('keydown', (event) => { if (event.key === "Escape") closeNav(); });
     </script>
 </body>
